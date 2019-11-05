@@ -1,20 +1,20 @@
 node {
-    def server = Artifactory.server('anshupa.jfrog.io')
+    def server = Artifactory.server('myjfrogserver1.jfrog.io')
     def buildInfo = Artifactory.newBuildInfo()
     def rtMaven = Artifactory.newMavenBuild()
     
     
     stage ('Checkout & Build') {
-        git url: 'https://github.com/itrainwarriors/jfrog-maven.git'
+        git url: 'https://github.com/itrain-demo/jfrog-maven.git'
     }
  
     stage ('Code Build') {
-        rtMaven.tool = 'maven' // Tool name from Jenkins configuration
+        rtMaven.tool = 'mavn' // Tool name from Jenkins configuration
         rtMaven.run pom: 'pom.xml', goals: 'clean compile'
     }
     
     stage ('UnitTest') {
-        rtMaven.tool = 'maven' // Tool name from Jenkins configuration
+        rtMaven.tool = 'mavn' // Tool name from Jenkins configuration
         rtMaven.run pom: 'pom.xml', goals: 'test'
     }
     
